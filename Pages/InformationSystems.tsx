@@ -10,35 +10,36 @@ const InformationSystems: React.FC = () => {
   const [activeBadge, setActiveBadge] = useState<BadgeKey | null>(null);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
+  const handleClosePopup = () => {
+    setIsPopupVisible(false);
+
+    window.setTimeout(() => {
+      setActiveBadge(null);
+    }, 220);
+  };
+
   useEffect(() => {
-  if (!activeBadge) return;
+    if (!activeBadge) return;
 
-  const onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Escape") handleClosePopup();
-  };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClosePopup();
+    };
 
-  window.addEventListener("keydown", onKeyDown);
-  document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
 
-  const openTimer = window.setTimeout(() => {
-    setIsPopupVisible(true);
-  }, 10);
+    const openTimer = window.setTimeout(() => {
+      setIsPopupVisible(true);
+    }, 10);
 
-  return () => {
-    window.clearTimeout(openTimer);
-    window.removeEventListener("keydown", onKeyDown);
-    document.body.style.overflow = "";
-  };
-}, [activeBadge]);
+    return () => {
+      window.clearTimeout(openTimer);
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [activeBadge]);
 
   const sectionKeys = ["how", "why"] as const;
-  const handleClosePopup = () => {
-  setIsPopupVisible(false);
-
-  window.setTimeout(() => {
-    setActiveBadge(null);
-  }, 220);
-};
 
   return (
     <>
@@ -219,119 +220,122 @@ const InformationSystems: React.FC = () => {
       </div>
 
       {activeBadge && (
-  <div
-    className="fixed inset-0 z-50 flex items-center justify-center px-4"
-    onClick={handleClosePopup}
-  >
-    <div
-      className={`absolute inset-0 bg-slate-950/75 backdrop-blur-sm transition-all duration-300 ${
-        isPopupVisible ? "opacity-100" : "opacity-0"
-      }`}
-    ></div>
-
-    <div
-      onClick={(e) => e.stopPropagation()}
-      className={`relative z-10 w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-[2.5rem] border border-indigo-400/30 bg-slate-900 text-white shadow-[0_0_60px_rgba(79,70,229,0.28)] transition-all duration-300 ease-out ${
-        isPopupVisible
-          ? "opacity-100 translate-y-0 scale-100"
-          : "opacity-0 translate-y-4 scale-[0.985]"
-      } ${lang === "he" ? "text-right" : "text-left"}`}
-    >
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none rounded-[2.5rem]"></div>
-      <div
-        className={`absolute top-0 right-0 w-40 h-40 bg-indigo-600/20 blur-3xl rounded-full transition-all duration-500 ${
-          isPopupVisible ? "opacity-100 scale-100" : "opacity-0 scale-75"
-        }`}
-      ></div>
-      <div
-        className={`absolute bottom-0 left-0 w-40 h-40 bg-indigo-500/10 blur-3xl rounded-full transition-all duration-500 ${
-          isPopupVisible ? "opacity-100 scale-100" : "opacity-0 scale-75"
-        }`}
-      ></div>
-
-      <div className="relative z-10 p-8 md:p-10">
-        <div className="flex items-start justify-between gap-4 mb-8">
-          <div>
-            <span
-              className={`inline-block px-3 py-1 bg-indigo-600/20 border border-indigo-400/30 text-indigo-200 text-xs font-bold rounded-full uppercase tracking-[0.2em] tech-font mb-4 transition-all duration-500 ${
-                isPopupVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-2"
-              }`}
-            >
-              {t(`isPage.badgesPopup.${activeBadge}.eyebrow`)}
-            </span>
-
-            <h3
-              className={`text-2xl md:text-4xl font-extrabold text-white leading-tight tech-font transition-all duration-500 delay-75 ${
-                isPopupVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-2"
-              }`}
-            >
-              {t(`isPage.badgesPopup.${activeBadge}.title`)}
-            </h3>
-          </div>
-
-          <button
-            type="button"
-            onClick={handleClosePopup}
-            className="flex items-center justify-center w-11 h-11 rounded-2xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition"
-            aria-label="Close popup"
-          >
-            ✕
-          </button>
-        </div>
-
-        <p
-          className={`text-lg leading-relaxed text-indigo-100 mb-10 transition-all duration-500 delay-100 ${
-            isPopupVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-          }`}
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center px-4"
+          onClick={handleClosePopup}
         >
-          {t(`isPage.badgesPopup.${activeBadge}.intro`)}
-        </p>
+          <div
+            className={`absolute inset-0 bg-slate-950/75 backdrop-blur-sm transition-all duration-300 ${
+              isPopupVisible ? "opacity-100" : "opacity-0"
+            }`}
+          ></div>
 
-        <div className="space-y-8">
-          {sectionKeys.map((sectionKey, sectionIndex) => (
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className={`relative z-10 w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-[2.5rem] border border-indigo-400/30 bg-slate-900 text-white shadow-[0_0_60px_rgba(79,70,229,0.28)] transition-all duration-300 ease-out ${
+              isPopupVisible
+                ? "opacity-100 translate-y-0 scale-100"
+                : "opacity-0 translate-y-4 scale-[0.985]"
+            } ${lang === "he" ? "text-right" : "text-left"}`}
+          >
+            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none rounded-[2.5rem]"></div>
+
             <div
-              key={sectionKey}
-              className={`rounded-[2rem] border border-white/10 bg-white/5 p-6 md:p-8 transition-all duration-500 ${
-                isPopupVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-3"
+              className={`absolute top-0 right-0 w-40 h-40 bg-indigo-600/20 blur-3xl rounded-full transition-all duration-500 ${
+                isPopupVisible ? "opacity-100 scale-100" : "opacity-0 scale-75"
               }`}
-              style={{ transitionDelay: `${140 + sectionIndex * 70}ms` }}
-            >
-              <h4 className="text-xl md:text-2xl font-bold text-indigo-300 tech-font mb-5 flex items-center gap-3">
-                <span className="w-3 h-3 rounded-full bg-indigo-400 shadow-[0_0_12px_rgba(129,140,248,0.9)]"></span>
-                {t(
-                  `isPage.badgesPopup.${activeBadge}.sections.${sectionKey}.title`
-                )}
-              </h4>
+            ></div>
 
-              <ul className="space-y-4 text-slate-200 leading-relaxed">
-                {[0, 1, 2].map((idx) => (
-                  <li
-                    key={idx}
-                    className={`${
-                      lang === "he"
-                        ? "border-r-2 border-indigo-500/40 pr-4"
-                        : "border-l-2 border-indigo-500/40 pl-4"
+            <div
+              className={`absolute bottom-0 left-0 w-40 h-40 bg-indigo-500/10 blur-3xl rounded-full transition-all duration-500 ${
+                isPopupVisible ? "opacity-100 scale-100" : "opacity-0 scale-75"
+              }`}
+            ></div>
+
+            <div className="relative z-10 p-8 md:p-10">
+              <div className="flex items-start justify-between gap-4 mb-8">
+                <div>
+                  <span
+                    className={`inline-block px-3 py-1 bg-indigo-600/20 border border-indigo-400/30 text-indigo-200 text-xs font-bold rounded-full uppercase tracking-[0.2em] tech-font mb-4 transition-all duration-500 ${
+                      isPopupVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-2"
                     }`}
                   >
-                    {t(
-                      `isPage.badgesPopup.${activeBadge}.sections.${sectionKey}.items.${idx}`
-                    )}
-                  </li>
+                    {t(`isPage.badgesPopup.${activeBadge}.eyebrow`)}
+                  </span>
+
+                  <h3
+                    className={`text-2xl md:text-4xl font-extrabold text-white leading-tight tech-font transition-all duration-500 delay-75 ${
+                      isPopupVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-2"
+                    }`}
+                  >
+                    {t(`isPage.badgesPopup.${activeBadge}.title`)}
+                  </h3>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleClosePopup}
+                  className="flex items-center justify-center w-11 h-11 rounded-2xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition"
+                  aria-label="Close popup"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <p
+                className={`text-lg leading-relaxed text-indigo-100 mb-10 transition-all duration-500 delay-100 ${
+                  isPopupVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-2"
+                }`}
+              >
+                {t(`isPage.badgesPopup.${activeBadge}.intro`)}
+              </p>
+
+              <div className="space-y-8">
+                {sectionKeys.map((sectionKey, sectionIndex) => (
+                  <div
+                    key={sectionKey}
+                    className={`rounded-[2rem] border border-white/10 bg-white/5 p-6 md:p-8 transition-all duration-500 ${
+                      isPopupVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-3"
+                    }`}
+                    style={{ transitionDelay: `${140 + sectionIndex * 70}ms` }}
+                  >
+                    <h4 className="text-xl md:text-2xl font-bold text-indigo-300 tech-font mb-5 flex items-center gap-3">
+                      <span className="w-3 h-3 rounded-full bg-indigo-400 shadow-[0_0_12px_rgba(129,140,248,0.9)]"></span>
+                      {t(
+                        `isPage.badgesPopup.${activeBadge}.sections.${sectionKey}.title`
+                      )}
+                    </h4>
+
+                    <ul className="space-y-4 text-slate-200 leading-relaxed">
+                      {[0, 1, 2].map((idx) => (
+                        <li
+                          key={idx}
+                          className={`${
+                            lang === "he"
+                              ? "border-r-2 border-indigo-500/40 pr-4"
+                              : "border-l-2 border-indigo-500/40 pl-4"
+                          }`}
+                        >
+                          {t(
+                            `isPage.badgesPopup.${activeBadge}.sections.${sectionKey}.items.${idx}`
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-)}
       )}
     </>
   );
