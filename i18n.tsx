@@ -183,77 +183,149 @@ electricity: {
     
     // ---------- INFORMATION SYSTEMS PAGE ----------
     isPage: {
-      hero: {
-        tag: "חטיבת מערכות מידע",
-        name: "הילה כהן",
-        subtitle:
-          "מנכלית החברה ומובילת פעילות מערכות המידע. מומחית בליווי, ניהול ויישום פרויקטי מערכות מידע מורכבים עבור ארגונים פיננסיים.",
-        badges: {
-          salesforce: "Salesforce Specialist",
-          fintech: "Fintech Expert",
+  hero: {
+    tag: "חטיבת מערכות מידע",
+    name: "הילה כהן",
+    subtitle:
+      "מנכלית החברה ומובילת פעילות מערכות המידע. מומחית בליווי, ניהול ויישום פרויקטי מערכות מידע מורכבים עבור ארגונים.",
+    badges: {
+      salesforce: "Salesforce",
+      fintech: "פינטק",
+      processAutomation: "מיכון תהליכים",
+    },
+  },
+  expertise: {
+    title: "מומחיות וערך מוסף",
+    p1:
+      "אנו מביאים ערך מוסף משמעותי לארגונים ממגוון תחומים, בזכות ניסיון מעשי בניהול והטמעה של מערכות מורכבות ובתהליכים ארגוניים מקצה לקצה. היכולת שלנו לחבר בין צרכים עסקיים מורכבים לפתרונות טכנולוגיים יציבים, מדויקים וישימים – היא הליבה של הפעילות שלנו.",
+    p2:
+      "ב-Solchi אנו מחויבים לצמצם מורכבות, לפשט תהליכים ולשפר את החוויה הארגונית והעסקית מקצה לקצה – משלב האפיון והייזום, דרך תכנון ויישום מלא של מערכות, ועד לניהול ספקים ובקרת ביצועים. אנו מתמקדים ביצירת תהליכים יעילים יותר, חיסכון במשאבים, שיפור מתמיד והתייעלות ארגונית שמייצרת ערך מדיד לאורך זמן.",
+  },
+  credit: {
+    title: "מערכות אשראי ופיננסים",
+    items: [
+      "הגשת בקשה וחיתום",
+      "בחינת בקשה ותפעול הלוואה",
+      "ניהול בקרות ודוחות",
+      "תמיכה בציות ורגולציה",
+      "אפיון תהליכים עסקיים",
+      "אינטגרציה (ERP, CRM)",
+    ],
+  },
+  more: {
+    title: "תחומי התמחות נוספים",
+    items: [
+      {
+        title: "Roadmap אסטרטגי",
+        desc:
+          "בניית תוכנית עבודה למחשוב הארגון, קביעת KPI ובחינתם לאורך חיי הפרויקט",
+      },
+      {
+        title: "מומחיות Salesforce",
+        desc:
+          "פיתוח מערכות ליבה על גבי הפלטפורמה וניהול פרויקטי Salesforce מורכבים",
+      },
+      {
+        title: "ניהול Delivery",
+        desc:
+          "הובלת פרויקטי פיתוח פנימיים או במיקור חוץ משלב הייזום עד ליישום מלא",
+      },
+      {
+        title: "ניתוח כדאיות",
+        desc:
+          "בחינת חלופות ליישום - עלות, אפקטיביות וכדאיות פיננסית ותפעולית",
+      },
+      {
+        title: "כתיבת מכרזים",
+        desc:
+          "איתור ובחירת פתרונות ותשתיות, כולל כתיבת מכרזים וניהולם המקצועי",
+      },
+    ],
+  },
+  why: {
+    title: "למה Solchi למערכות מידע?",
+    items: [
+      "הבנה פיננסית עמוקה לצד מומחיות טכנולוגית ללא פשרות",
+      "ניסיון מוכח במערכות אשראי ובנקאות מהמובילות בישראל",
+      "יכולת הובלה חוצת-ארגון מול מנהלים, ספקים ולקוחות קצה",
+      "ראייה מערכתית וארוכת טווח המותאמת לצרכי הרגולציה",
+    ],
+  },
+  badgesPopup: {
+    salesforce: {
+      eyebrow: "Salesforce Expertise",
+      title: "Salesforce שמחבר בין אסטרטגיה, תהליך וביצוע",
+      intro:
+        "ליווי ארגונים בתכנון, ניהול ויישום פתרונות Salesforce בצורה שמחברת בין צרכים עסקיים, תהליכי עבודה ופתרון טכנולוגי מדויק.",
+      sections: {
+        how: {
+          title: "איך אני עוזרת?",
+          items: [
+            "אפיון צרכים עסקיים ותרגומם לפתרון ישים על גבי הפלטפורמה.",
+            "ניהול והובלת פרויקטי Salesforce מקצה לקצה.",
+            "שיפור תהליכים ארגוניים ושילוב בין מערכות ליבה.",
+          ],
+        },
+        why: {
+          title: "למה זה חשוב?",
+          items: [
+            "יצירת תהליך עבודה מסודר, אחיד ומדיד.",
+            "שיפור חוויית המשתמשים בארגון.",
+            "בניית תשתית טכנולוגית שתומכת בצמיחה עסקית.",
+          ],
         },
       },
-      expertise: {
-        title: "מומחיות וערך מוסף",
-        p1:
-          "אנו מביאים ערך מוסף משמעותי לארגונים ממגוון תחומים, בזכות ניסיון מעשי בניהול והטמעה של מערכות מורכבות ובתהליכים ארגוניים מקצה לקצה. היכולת שלנו לחבר בין צרכים עסקיים מורכבים לפתרונות טכנולוגיים יציבים, מדויקים וישימים – היא הליבה של הפעילות שלנו.",
-        p2:
-          "ב-Solchi אנו מחויבים לצמצם מורכבות, לפשט תהליכים ולשפר את החוויה הארגונית והעסקית מקצה לקצה – משלב האפיון והייזום, דרך תכנון ויישום מלא של מערכות, ועד לניהול ספקים ובקרת ביצועים. אנו מתמקדים ביצירת תהליכים יעילים יותר, חיסכון במשאבים, שיפור מתמיד והתייעלות ארגונית שמייצרת ערך מדיד לאורך זמן.",
-      },
-      credit: {
-        title: "מערכות אשראי ופיננסים",
-        items: [
-          "הגשת בקשה וחיתום",
-          "בחינת בקשה ותפעול הלוואה",
-          "ניהול בקרות ודוחות",
-          "תמיכה בציות ורגולציה",
-          "אפיון תהליכים עסקיים",
-          "אינטגרציה (ERP, CRM)",
-        ],
-      },
-      more: {
-        title: "תחומי התמחות נוספים",
-        items: [
-          {
-            title: "Roadmap אסטרטגי",
-            desc:
-              "בניית תוכנית עבודה למחשוב הארגון, קביעת KPI ובחינתם לאורך חיי הפרויקט",
-          },
-          {
-            title: "מומחיות Salesforce",
-            desc:
-              "פיתוח מערכות ליבה על גבי הפלטפורמה וניהול פרויקטי Salesforce מורכבים",
-          },
-          {
-            title: "ניהול Delivery",
-            desc:
-              "הובלת פרויקטי פיתוח פנימיים או במיקור חוץ משלב הייזום עד ליישום מלא",
-          },
-
-          // --- swapped order: ניתוח כדאיות לפני כתיבת מכרזים ---
-          {
-            title: "ניתוח כדאיות",
-            desc:
-              "בחינת חלופות ליישום - עלות, אפקטיביות וכדאיות פיננסית ותפעולית",
-          },
-          {
-            title: "כתיבת מכרזים",
-            desc:
-              "איתור ובחירת פתרונות ותשתיות, כולל כתיבת מכרזים וניהולם המקצועי",
-          },
-        ],
-      },
-      why: {
-        title: "למה Solchi למערכות מידע?",
-        items: [
-          "הבנה פיננסית עמוקה לצד מומחיות טכנולוגית ללא פשרות",
-          "ניסיון מוכח במערכות אשראי ובנקאות מהמובילות בישראל",
-          "יכולת הובלה חוצת-ארגון מול מנהלים, ספקים ולקוחות קצה",
-          "ראייה מערכתית וארוכת טווח המותאמת לצרכי הרגולציה",
-        ],
+    },
+    fintech: {
+      eyebrow: "Fintech & Credit Systems",
+      title: "מומחיות פיננסית שמבינה גם את העסק וגם את המערכת",
+      intro:
+        "ניסיון עמוק בעולמות האשראי, הפיננסים והרגולציה, עם יכולת לחבר בין דרישות עסקיות מורכבות לבין יישום מערכות מידע יציבות ומדויקות.",
+      sections: {
+        how: {
+          title: "איפה הערך שלי בא לידי ביטוי?",
+          items: [
+            "הבנה עמוקה של מערכות אשראי, הלוואות, חיתום ותפעול פיננסי.",
+            "אפיון צרכים עסקיים מורכבים ותרגומם לפתרונות מערכתיים מדויקים.",
+            "חיבור בין רגולציה, בקרות, דוחות וממשקים למערכות הליבה של הארגון.",
+          ],
+        },
+        why: {
+          title: "למה זה משמעותי?",
+          items: [
+            "פתרונות שמתאימים לעולמות פיננסיים רגישים ומורכבים.",
+            "שילוב בין הבנה עסקית, רגולטורית וטכנולוגית במקום אחד.",
+            "יכולת להוביל פרויקטים חוצי-ארגון עם ריבוי ממשקים וספקים.",
+          ],
+        },
       },
     },
-
+    processAutomation: {
+      eyebrow: "Operational Efficiency",
+      title: 'פחות "עבודה שחורה", יותר תוצאות: מומחית במיכון תהליכים',
+      intro:
+        "האם הארגון שלך עדיין נשען על אקסלים ידניים, מיילים אבודים ותהליכים מסורבלים? המומחיות שלי היא לזהות את צווארי הבקבוק ולהפוך אותם לתהליכים אוטומטיים וחלקים.",
+      sections: {
+        how: {
+          title: "איך אני עוזרת לארגון להתייעל?",
+          items: [
+            "מיפוי ואבחון: ניתוח המצב הקיים ואיתור נקודות התורפה התפעוליות.",
+            "תכנון ארכיטקטורת מידע: בחירת הכלים הנכונים למיכון המשימות הידניות.",
+            "הטמעה וניהול שינוי: ליווי הצוותים במעבר לעבודה ממוכנת, יעילה ומדידה.",
+          ],
+        },
+        why: {
+          title: "למה זה כדאי?",
+          items: [
+            "צמצום טעויות: המערכת עובדת בשבילך, לא להיפך.",
+            "Scalability: היכולת לגדול בנפח הפעילות מבלי להגדיל את כוח האדם באותו יחס.",
+            "שקיפות: דאשבורדים ודוחות בזמן אמת על ביצועי הארגון.",
+          ],
+        },
+      },
+    },
+  },
+},
     // ---------- CONTACT ----------
     contact: {
       pageTitle: "צור קשר",
@@ -511,55 +583,150 @@ electricity: {
   ],
 },
 
-    isPage: {
-      hero: {
-        tag: "Information Systems Division",
-        name: "Hila Cohen",
-        subtitle:
-          "Head of the Information Systems practice. Expert in leading, managing, and delivering complex information systems projects for financial institutions.",
-        badges: {
-          salesforce: "Salesforce Specialist",
-          fintech: "Fintech Expert",
+   isPage: {
+  hero: {
+    tag: "Information Systems Division",
+    name: "Hila Cohen",
+    subtitle:
+      "CEO and head of the Information Systems division. Expert in leading, managing, and delivering complex information systems projects for organizations.",
+    badges: {
+      salesforce: "Salesforce",
+      fintech: "Fintech",
+      processAutomation: "Process Automation",
+    },
+  },
+  expertise: {
+    title: "Expertise & Value",
+    p1:
+      "We deliver significant added value to organizations across diverse industries, driven by hands-on experience in managing and implementing complex systems and end-to-end organizational processes. Our ability to translate complex business needs into stable, precise, and practical technological solutions lies at the core of our work.",
+    p2:
+      "At Solchi, we are committed to reducing complexity, streamlining processes, and enhancing the organizational and business experience from end to end — from initial analysis and initiation, through full system design and implementation, to vendor management and performance control. We focus on creating more efficient processes, optimizing resources, driving continuous improvement, and delivering measurable long-term value.",
+  },
+  credit: {
+    title: "Credit & Finance Systems",
+    items: [
+      "Underwriting",
+      "Loan operations",
+      "Reporting & controls",
+      "Compliance",
+      "Business analysis",
+      "ERP/CRM integrations",
+    ],
+  },
+  more: {
+    title: "Additional Expertise",
+    items: [
+      {
+        title: "Strategic Roadmap",
+        desc:
+          "Building a comprehensive IT roadmap for the organization, defining KPIs, and monitoring them throughout the lifecycle of the project.",
+      },
+      {
+        title: "Salesforce",
+        desc:
+          "Designing and developing core systems on the Salesforce platform and leading complex Salesforce implementation projects.",
+      },
+      {
+        title: "Delivery",
+        desc:
+          "Leading internal and outsourced development projects from initial concept and planning through full implementation.",
+      },
+      {
+        title: "Feasibility",
+        desc:
+          "Evaluating implementation alternatives, including cost, effectiveness, and financial and operational feasibility.",
+      },
+      {
+        title: "RFPs",
+        desc:
+          "Identifying and selecting suitable solutions and infrastructures, including the preparation and professional management of tenders.",
+      },
+    ],
+  },
+  why: {
+    title: "Why Solchi?",
+    items: [
+      "Deep Financial Understanding Combined with Strong Technological Expertise",
+      "Proven Experience in Credit and Banking Systems",
+      "Cross-organizational leadership",
+      "Long-Term Systems Thinking Aligned with Regulatory Requirements",
+    ],
+  },
+  badgesPopup: {
+    salesforce: {
+      eyebrow: "Salesforce Expertise",
+      title: "Salesforce That Connects Strategy, Process, and Execution",
+      intro:
+        "Supporting organizations in planning, managing, and implementing Salesforce solutions that connect business needs, workflows, and precise technology delivery.",
+      sections: {
+        how: {
+          title: "How I help",
+          items: [
+            "Translating business needs into practical platform solutions.",
+            "Leading Salesforce projects end to end.",
+            "Improving organizational workflows and integrating core systems.",
+          ],
+        },
+        why: {
+          title: "Why it matters",
+          items: [
+            "Creates structured and measurable processes.",
+            "Improves internal user experience.",
+            "Builds a scalable technology foundation for growth.",
+          ],
         },
       },
-      expertise: {
-        title: "Expertise & Value",
-        p1:
-          "We deliver significant added value to organizations across diverse industries, driven by hands-on experience in managing and implementing complex systems and end-to-end organizational processes. Our ability to translate complex business needs into stable, precise, and practical technological solutions lies at the core of our work.",
-        p2:
-          "At Solchi, we are committed to reducing complexity, streamlining processes, and enhancing the organizational and business experience from end to end — from initial analysis and initiation, through full system design and implementation, to vendor management and performance control. We focus on creating more efficient processes, optimizing resources, driving continuous improvement, and delivering measurable long-term value.",
-      },
-      credit: {
-        title: "Credit & Finance Systems",
-        items: [
-          "Underwriting",
-          "Loan operations",
-          "Reporting & controls",
-          "Compliance",
-          "Business analysis",
-          "ERP/CRM integrations",
-        ],
-      },
-      more: {
-        title: "Additional Expertise",
-        items: [
-          { title: "Strategic Roadmap", desc: "Building a comprehensive IT roadmap for the organization, defining KPIs, and monitoring them throughout the lifecycle of the project." },
-          { title: "Salesforce", desc: "Designing and developing core systems on the Salesforce platform and leading complex Salesforce implementation projects." },
-          { title: "Delivery", desc: "Leading internal and outsourced development projects from initial concept and planning through full implementation." },
-          { title: "Feasibility", desc: "Evaluating implementation alternatives, including cost, effectiveness, and financial and operational feasibility." },
-          { title: "RFPs", desc: "Identifying and selecting suitable solutions and infrastructures, including the preparation and professional management of tenders." },
-        ],
-      },
-      why: {
-        title: "Why Solchi?",
-        items: [
-          "Deep Financial Understanding Combined with Strong Technological Expertise",
-          "Proven Experience in Credit and Banking Systems",
-          "Cross-organizational leadership",
-          "Long-Term Systems Thinking Aligned with Regulatory Requirements",
-        ],
+    },
+    fintech: {
+      eyebrow: "Fintech & Credit Systems",
+      title: "Financial Expertise That Understands Both Business and Systems",
+      intro:
+        "Deep experience in credit, finance, and regulation, with the ability to connect complex business requirements to stable and accurate information systems.",
+      sections: {
+        how: {
+          title: "Where I bring value",
+          items: [
+            "Deep understanding of credit systems, loans, underwriting, and financial operations.",
+            "Translating complex business requirements into accurate system solutions.",
+            "Connecting regulation, controls, reporting, and interfaces to the organization’s core systems.",
+          ],
+        },
+        why: {
+          title: "Why it matters",
+          items: [
+            "Solutions tailored to sensitive and complex financial environments.",
+            "Business, regulatory, and technological thinking in one place.",
+            "Ability to lead cross-functional projects involving multiple stakeholders and vendors.",
+          ],
+        },
       },
     },
+    processAutomation: {
+      eyebrow: "Operational Efficiency",
+      title: 'Less "busy work", more results: Process Automation Expertise',
+      intro:
+        "Is your organization still relying on manual spreadsheets, lost emails, and cumbersome workflows? My expertise is identifying bottlenecks and turning them into smooth, automated processes.",
+      sections: {
+        how: {
+          title: "How I help organizations become more efficient",
+          items: [
+            "Mapping and diagnosis: analyzing the current state and identifying operational weak points.",
+            "Information architecture planning: selecting the right tools to automate manual tasks.",
+            "Implementation and change management: supporting teams through the transition to efficient, measurable workflows.",
+          ],
+        },
+        why: {
+          title: "Why it pays off",
+          items: [
+            "Fewer errors: the system works for you, not the other way around.",
+            "Scalability: the ability to grow activity volume without growing headcount at the same rate.",
+            "Transparency: dashboards and real-time reporting on organizational performance.",
+          ],
+        },
+      },
+    },
+  },
+},
 
     contact: {
       pageTitle: "Contact",
