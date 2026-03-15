@@ -1,0 +1,38 @@
+html {
+  scroll-behavior: smooth;
+}
+
+#planning-services {
+  scroll-margin-top: 90px;
+}
+
+/* ניגודיות גבוהה */
+body.a11y-high-contrast {
+  filter: contrast(1.25);
+}
+
+/* פוקוס ברור למקלדת */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* פחות אנימציות למי שמבקש */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
