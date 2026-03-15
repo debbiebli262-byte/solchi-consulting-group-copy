@@ -248,41 +248,51 @@ export const copy = {
     },
 
     contact: {
-      pageTitle: "צור קשר",
-      pageSubtitle:
-        "אנחנו כאן כדי לענות על כל שאלה ולתאם פגישת היכרות מקצועית.",
-      detailsTitle: "פרטי התקשרות",
-      addressTitle: "כתובתנו",
-      addressText: "הורד 544, מושב קידרון, ישראל",
-      addressHint: "לחצו לניווט במפות",
-      availabilityTitle: "זמינות שירות",
-      availabilityHours: "ימי א' - ה' | בין השעות 08:30 - 18:00",
-      formTitle: "שלחו לנו הודעה",
+  pageTitle: "צור קשר",
+  pageSubtitle:
+    "אנחנו כאן כדי לענות על כל שאלה ולתאם פגישת היכרות מקצועית.",
+  detailsTitle: "פרטי התקשרות",
+  addressTitle: "כתובתנו",
+  addressText: "הורד 544, מושב קידרון, ישראל",
+  addressHint: "לחצו לניווט במפות",
+  availabilityTitle: "זמינות שירות",
+  availabilityHours: "ימי א' - ה' | בין השעות 08:30 - 18:00",
+  formTitle: "שלחו לנו הודעה",
 
-      fields: {
-        fullName: "שם מלא",
-        subject: "נושא הפנייה",
-        email: 'דוא"ל',
-        phone: "טלפון",
-        message: "הודעה",
-      },
+  fields: {
+    fullName: "שם מלא",
+    subject: "נושא הפנייה",
+    email: 'דוא"ל',
+    phone: "טלפון",
+    message: "הודעה",
+  },
 
-      placeholders: {
-        fullName: "ישראל ישראלי",
-        subject: "בחרו נושא",
-        email: "name@company.com",
-        phone: "05X-XXXXXXX",
-        message: "תארו בקצרה את הצורך שלכם...",
-      },
+  placeholders: {
+    fullName: "ישראל ישראלי",
+    subject: "בחרו נושא",
+    email: "name@company.com",
+    phone: "מספר טלפון",
+    message: "תארו בקצרה את הצורך שלכם...",
+  },
 
-      subjectOptions: {
-        electricalDivision: "חטיבת החשמל",
-        informationSystems: "מערכות מידע",
-      },
+  subjectOptions: {
+    electricalDivision: "חטיבת החשמל",
+    informationSystems: "מערכות מידע",
+  },
 
-      formUnavailable: "לא ניתן כרגע לשלוח פניות",
-    },
+  validation: {
+    nameRequired: "יש להזין שם מלא",
+    nameLettersOnly: "השם יכול לכלול אותיות בעברית או באנגלית בלבד, ללא מספרים",
+    emailRequired: 'יש להזין כתובת דוא"ל',
+    emailNoSpaces: 'כתובת דוא"ל לא יכולה לכלול רווחים',
+    emailInvalid: 'יש להזין כתובת דוא"ל תקינה',
+    phoneRequired: "יש להזין מספר טלפון",
+    phoneInvalid: "יש להזין מספר טלפון תקין בהתאם למדינה שנבחרה",
+    phoneInvalidIsrael: "בישראל יש להזין 10 ספרות כולל 0 בהתחלה",
+  },
 
+  formUnavailable: "לא ניתן כרגע לשלוח פניות",
+},
     thankYou: {
       title: "הודעתכם התקבלה!",
       subtitle: "תודה שפניתם ל-Solchi. נציג מטעמנו יחזור אליכם בהקדם.",
@@ -577,41 +587,54 @@ export const copy = {
     },
 
     contact: {
-      pageTitle: "Contact",
-      pageSubtitle:
-        "We’re here to answer any question and schedule a professional introductory meeting.",
-      detailsTitle: "Contact Details",
-      addressTitle: "Our Address",
-      addressText: "Ha-Vered 544, Kidron, Israel",
-      addressHint: "Click to open in Maps",
-      availabilityTitle: "Service Availability",
-      availabilityHours: "Sunday–Thursday | 08:30–18:00",
-      formTitle: "Send Us a Message",
+  pageTitle: "Contact",
+  pageSubtitle:
+    "We’re here to answer any question and schedule a professional introductory meeting.",
+  detailsTitle: "Contact Details",
+  addressTitle: "Our Address",
+  addressText: "Ha-Vered 544, Kidron, Israel",
+  addressHint: "Click to open in Maps",
+  availabilityTitle: "Service Availability",
+  availabilityHours: "Sunday–Thursday | 08:30–18:00",
+  formTitle: "Send Us a Message",
 
-      fields: {
-        fullName: "Full Name",
-        subject: "Inquiry Subject",
-        email: "Email",
-        phone: "Phone",
-        message: "Message",
-      },
+  fields: {
+    fullName: "Full Name",
+    subject: "Inquiry Subject",
+    email: "Email",
+    phone: "Phone",
+    message: "Message",
+  },
 
-      placeholders: {
-        fullName: "John Doe",
-        subject: "Select a subject",
-        email: "name@company.com",
-        phone: "+972-5X-XXXXXXX",
-        message: "Briefly describe what you need...",
-      },
+  placeholders: {
+    fullName: "John Doe",
+    subject: "Select a subject",
+    email: "name@company.com",
+    phone: "Phone number",
+    message: "Briefly describe what you need...",
+  },
 
-      subjectOptions: {
-        electricalDivision: "Electrical Division",
-        informationSystems: "Information Systems",
-      },
+  subjectOptions: {
+    electricalDivision: "Electrical Division",
+    informationSystems: "Information Systems",
+  },
 
-      formUnavailable: "It is currently not possible to send inquiries",
-    },
+  validation: {
+    nameRequired: "Please enter your full name",
+    nameLettersOnly:
+      "The name may contain Hebrew or English letters only, with no numbers",
+    emailRequired: "Please enter an email address",
+    emailNoSpaces: "Email address cannot contain spaces",
+    emailInvalid: "Please enter a valid email address",
+    phoneRequired: "Please enter a phone number",
+    phoneInvalid: "Please enter a valid phone number for the selected country",
+    phoneInvalidIsrael:
+      "For Israel, please enter 10 digits including the leading 0",
+  },
 
+  formUnavailable: "It is currently not possible to send inquiries",
+},
+    
     thankYou: {
       title: "Message Received!",
       subtitle:
