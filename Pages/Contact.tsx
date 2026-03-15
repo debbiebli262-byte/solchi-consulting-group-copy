@@ -1,16 +1,66 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import {
+  getCountries,
+  getCountryCallingCode,
+  parsePhoneNumberFromString,
+  CountryCode,
+} from "libphonenumber-js";
 import { useI18n } from "../i18n";
+
+type FormDataState = {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+  country: CountryCode;
+};
+
+type FormErrors = {
+  name?: string;
+  email?: string;
+  phone?: string;
+};
+
+const DEFAULT_COUNTRY: CountryCode = "IL";
 
 const Contact: React.FC = () => {
   const { t, lang } = useI18n();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormDataState>({
     name: "",
     email: "",
     phone: "",
     subject: "",
     message: "",
+    country: DEFAULT_COUNTRY,
   });
+
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  const regionNames = useMemo(() => {
+    try {
+      return new Intl.DisplayNames(["en"], { type: "region" });
+    } catch {
+      return null;
+    }
+  }, []);
+
+  const countries = useMemo(() => {
+    return getCountries()
+      .filter((code) => code.length === 2)
+      .map((code) => ({
+        code,
+        callingCode: `+${getCountryCallingCode(code)}`,
+        name: regionNames?.of(code) || code,
+        flag: getFlagEmoji(code),
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [regionNames]);
+
+  const selectedCountryCallingCode = useMemo(() => {
+    return `+${getCountryCallingCode(formData.country)}`;
+  }, [formData.country]);
 
   const openMap = () => {
     window.open(
@@ -19,8 +69,121 @@ const Contact: React.FC = () => {
     );
   };
 
+  const validateName = (value: string) => {
+    const trimmed = value.trim();
+
+    if (!trimmed) {
+      return t("contact.validation.nameRequired");
+    }
+
+    // English + Hebrew letters, spaces, apostrophes, hyphens
+    const nameRegex = /^[A-Za-z\u0590-\u05FF\s'-]+$/;
+
+    if (!nameRegex.test(trimmed)) {
+      return t("contact.validation.nameLettersOnly");
+    }
+
+    return "";
+  };
+
+  const validateEmail = (value: string) => {
+    const trimmed = value.trim();
+
+    if (!trimmed) {
+      return t("contact.validation.emailRequired");
+    }
+
+    if (/\s/.test(value)) {
+      return t("contact.validation.emailNoSpaces");
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(trimmed)) {
+      return t("contact.validation.emailInvalid");
+    }
+
+    return "";
+  };
+
+  const validatePhone = (value: string, country: CountryCode) => {
+    const trimmed = value.trim();
+
+    if (!trimmed) {
+      return t("contact.validation.phoneRequired");
+    }
+
+    const digitsOnly = trimmed.replace(/[^\d]/g, "");
+
+    if (!digitsOnly) {
+      return t("contact.validation.phoneInvalid");
+    }
+
+    // Special rule for Israel:
+    // must be exactly 10 digits and start with 0
+    if (country === "IL") {
+      if (!/^0\d{9}$/.test(digitsOnly)) {
+        return t("contact.validation.phoneInvalidIsrael");
+      }
+      return "";
+    }
+
+    const fullInternationalNumber = `+${getCountryCallingCode(country)}${digitsOnly}`;
+    const phoneNumber = parsePhoneNumberFromString(fullInternationalNumber);
+
+    if (!phoneNumber || !phoneNumber.isValid()) {
+      return t("contact.validation.phoneInvalid");
+    }
+
+    return "";
+  };
+
+  const validateField = (
+    field: keyof FormDataState,
+    value: string,
+    countryOverride?: CountryCode
+  ) => {
+    switch (field) {
+      case "name":
+        return validateName(value);
+      case "email":
+        return validateEmail(value);
+      case "phone":
+        return validatePhone(value, countryOverride || formData.country);
+      default:
+        return "";
+    }
+  };
+
+  const updateError = (field: keyof FormErrors, message: string) => {
+    setErrors((prev) => ({
+      ...prev,
+      [field]: message || undefined,
+    }));
+  };
+
+  const handleBlur = (field: keyof FormDataState) => {
+    if (field === "name" || field === "email" || field === "phone") {
+      const message = validateField(field, formData[field]);
+      updateError(field, message);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const nextErrors: FormErrors = {
+      name: validateName(formData.name) || undefined,
+      email: validateEmail(formData.email) || undefined,
+      phone: validatePhone(formData.phone, formData.country) || undefined,
+    };
+
+    setErrors(nextErrors);
+
+    const hasErrors = Object.values(nextErrors).some(Boolean);
+    if (hasErrors) return;
+
+    // Sending is currently unavailable
   };
 
   return (
@@ -121,7 +284,7 @@ const Contact: React.FC = () => {
               {t("contact.formTitle")}
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div className="space-y-2">
                 <label className="block text-sm font-bold text-slate-700">
                   {t("contact.fields.fullName")}
@@ -129,13 +292,27 @@ const Contact: React.FC = () => {
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setFormData((prev) => ({ ...prev, name: value }));
+                    if (errors.name) {
+                      updateError("name", validateName(value));
+                    }
+                  }}
+                  onBlur={() => handleBlur("name")}
+                  className={`w-full px-5 py-4 rounded-2xl border outline-none transition-all bg-slate-50/50 ${
+                    errors.name
+                      ? "border-red-400 focus:border-red-500 focus:ring-4 focus:ring-red-100"
+                      : "border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                  }`}
                   placeholder={t("contact.placeholders.fullName")}
                   dir={lang === "he" ? "rtl" : "ltr"}
                 />
+                {errors.name && (
+                  <p className="text-sm text-red-600 font-medium">
+                    {errors.name}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -150,9 +327,7 @@ const Contact: React.FC = () => {
                   className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50 text-slate-700"
                   dir={lang === "he" ? "rtl" : "ltr"}
                 >
-                  <option value="">
-                    {t("contact.placeholders.subject")}
-                  </option>
+                  <option value="">{t("contact.placeholders.subject")}</option>
 
                   <option value="electrical">
                     {t("contact.subjectOptions.electricalDivision")}
@@ -172,29 +347,96 @@ const Contact: React.FC = () => {
                   <input
                     type="email"
                     value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFormData((prev) => ({ ...prev, email: value }));
+                      if (errors.email) {
+                        updateError("email", validateEmail(value));
+                      }
+                    }}
+                    onBlur={() => handleBlur("email")}
+                    className={`w-full px-5 py-4 rounded-2xl border outline-none transition-all bg-slate-50/50 ${
+                      errors.email
+                        ? "border-red-400 focus:border-red-500 focus:ring-4 focus:ring-red-100"
+                        : "border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                    }`}
                     placeholder={t("contact.placeholders.email")}
                     dir="ltr"
+                    inputMode="email"
+                    autoComplete="email"
                   />
+                  {errors.email && (
+                    <p className="text-sm text-red-600 font-medium">
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
                   <label className="block text-sm font-bold text-slate-700">
                     {t("contact.fields.phone")}
                   </label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                    className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50"
-                    placeholder={t("contact.placeholders.phone")}
-                    dir="ltr"
-                  />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-[210px_minmax(0,1fr)] gap-3">
+                    <select
+                      value={formData.country}
+                      onChange={(e) => {
+                        const nextCountry = e.target.value as CountryCode;
+                        setFormData((prev) => ({
+                          ...prev,
+                          country: nextCountry,
+                        }));
+
+                        if (formData.phone) {
+                          updateError(
+                            "phone",
+                            validatePhone(formData.phone, nextCountry)
+                          );
+                        }
+                      }}
+                      className="w-full px-4 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50 text-slate-700"
+                      dir="ltr"
+                    >
+                      {countries.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {country.flag} {country.name} ({country.callingCode})
+                        </option>
+                      ))}
+                    </select>
+
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setFormData((prev) => ({ ...prev, phone: value }));
+                        if (errors.phone) {
+                          updateError(
+                            "phone",
+                            validatePhone(value, formData.country)
+                          );
+                        }
+                      }}
+                      onBlur={() => handleBlur("phone")}
+                      className={`w-full px-5 py-4 rounded-2xl border outline-none transition-all bg-slate-50/50 ${
+                        errors.phone
+                          ? "border-red-400 focus:border-red-500 focus:ring-4 focus:ring-red-100"
+                          : "border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                      }`}
+                      placeholder={`${selectedCountryCallingCode} ${t(
+                        "contact.placeholders.phone"
+                      )}`}
+                      dir="ltr"
+                      inputMode="tel"
+                      autoComplete="tel"
+                    />
+                  </div>
+
+                  {errors.phone && (
+                    <p className="text-sm text-red-600 font-medium">
+                      {errors.phone}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -224,5 +466,13 @@ const Contact: React.FC = () => {
     </div>
   );
 };
+
+function getFlagEmoji(countryCode: string) {
+  return countryCode
+    .toUpperCase()
+    .replace(/./g, (char) =>
+      String.fromCodePoint(127397 + char.charCodeAt(0))
+    );
+}
 
 export default Contact;
