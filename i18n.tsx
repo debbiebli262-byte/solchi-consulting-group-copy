@@ -631,6 +631,7 @@ export const copy = {
     phoneInvalidIsrael:
       "For Israel, please enter 10 digits including the leading 0",
   },
+  },
 
   formUnavailable: "It is currently not possible to send inquiries",
 },
