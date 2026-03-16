@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   getCountries,
   getCountryCallingCode,
@@ -162,6 +162,16 @@ const Contact: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    setErrors((prev) => ({
+      name: prev.name ? validateName(formData.name) || undefined : undefined,
+      email: prev.email ? validateEmail(formData.email) || undefined : undefined,
+      phone: prev.phone
+        ? validatePhone(formData.phone, formData.country) || undefined
+        : undefined,
+    }));
+  }, [lang, formData.name, formData.email, formData.phone, formData.country]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -239,6 +249,50 @@ const Contact: React.FC = () => {
                     <p className="text-xs font-bold text-blue-400 mt-1 uppercase tracking-wider">
                       {t("contact.addressHint")}
                     </p>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-slate-900 text-lg mb-4">
+                    {t("contact.peopleTitle")}
+                  </h4>
+
+                  <div className="grid grid-cols-1 gap-4">
+                    <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 hover:border-blue-200 transition">
+                      <p className="font-semibold text-slate-900 text-base">
+                        {t("contact.people.hila.name")}
+                      </p>
+
+                      <p className="text-sm text-slate-500 mt-1 mb-3">
+                        {t("contact.people.hila.role")}
+                      </p>
+
+                      <a
+                        href={`mailto:${t("contact.people.hila.email")}`}
+                        className="text-blue-600 hover:text-blue-700 font-medium break-all"
+                        dir="ltr"
+                      >
+                        {t("contact.people.hila.email")}
+                      </a>
+                    </div>
+
+                    <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 hover:border-blue-200 transition">
+                      <p className="font-semibold text-slate-900 text-base">
+                        {t("contact.people.yehiel.name")}
+                      </p>
+
+                      <p className="text-sm text-slate-500 mt-1 mb-3">
+                        {t("contact.people.yehiel.role")}
+                      </p>
+
+                      <a
+                        href={`mailto:${t("contact.people.yehiel.email")}`}
+                        className="text-blue-600 hover:text-blue-700 font-medium break-all"
+                        dir="ltr"
+                      >
+                        {t("contact.people.yehiel.email")}
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
