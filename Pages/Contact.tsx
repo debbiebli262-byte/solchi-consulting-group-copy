@@ -59,13 +59,6 @@ const Contact: React.FC = () => {
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [regionNames]);
 
-  const openMap = () => {
-    window.open(
-      "https://www.google.com/maps/place/Ha-Vered+St+544,+Kidron,+Israel",
-      "_blank"
-    );
-  };
-
   const validateName = (value: string) => {
     const trimmed = value.trim();
     if (!trimmed) return t("contact.validation.nameRequired");
@@ -180,7 +173,7 @@ const Contact: React.FC = () => {
     try {
       await emailjs.send(
         "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
+        "template_52khh1v",
         {
           name: formData.name,
           email: formData.email,
@@ -204,21 +197,18 @@ const Contact: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 py-24">
-      {/* ... כל הקוד של העמוד נשאר בדיוק כמו אצלך ... */}
-
       <form onSubmit={handleSubmit} className="space-y-6" noValidate>
 
-        {/* כל השדות שלך נשארים אותו דבר */}
+        {/* כל שדות הטופס שלך נשארים בדיוק אותו דבר */}
 
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 rounded-2xl transition-all"
         >
-          {t("contact.send")}
+          שליחה
         </button>
 
       </form>
-
     </div>
   );
 };
