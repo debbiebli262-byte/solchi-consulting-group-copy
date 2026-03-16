@@ -454,7 +454,7 @@ const Contact: React.FC = () => {
                         ...prev,
                         country: nextCountry,
                       }));
-
+                  
                       if (formData.phone) {
                         updateError(
                           "phone",
@@ -466,7 +466,7 @@ const Contact: React.FC = () => {
                   >
                     {countries.map((country) => (
                       <option key={country.code} value={country.code}>
-                        {country.flag} ({country.callingCode})
+                        {country.name}
                       </option>
                     ))}
                   </select>
