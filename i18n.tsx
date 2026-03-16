@@ -310,7 +310,7 @@ export const copy = {
         about: "אודות הקבוצה",
         electricity: "חטיבת חשמל",
         is: "מערכות מידע",
-        : "צור קשר",
+        contact: "צור קשר",
       },
       contactTitle: "צרו קשר",
       address: "הורד 544, מושב קידרון, ישראל",
