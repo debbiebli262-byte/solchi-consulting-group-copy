@@ -58,10 +58,6 @@ const Contact: React.FC = () => {
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [regionNames]);
 
-  const selectedCountryCallingCode = useMemo(() => {
-    return `+${getCountryCallingCode(formData.country)}`;
-  }, [formData.country]);
-
   const openMap = () => {
     window.open(
       "https://www.google.com/maps/place/Ha-Vered+St+544,+Kidron,+Israel",
@@ -76,7 +72,6 @@ const Contact: React.FC = () => {
       return t("contact.validation.nameRequired");
     }
 
-    // English + Hebrew letters, spaces, apostrophes, hyphens
     const nameRegex = /^[A-Za-z\u0590-\u05FF\s'-]+$/;
 
     if (!nameRegex.test(trimmed)) {
@@ -119,8 +114,6 @@ const Contact: React.FC = () => {
       return t("contact.validation.phoneInvalid");
     }
 
-    // Special rule for Israel:
-    // must be exactly 10 digits and start with 0
     if (country === "IL") {
       if (!/^0\d{9}$/.test(digitsOnly)) {
         return t("contact.validation.phoneInvalidIsrael");
@@ -188,7 +181,7 @@ const Contact: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 py-24 animate-fade-in relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/50 blur-[100px] rounded-full -mr-48 -mt-48"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/50 blur-[100px] rounded-full -mr-48 -mt-48" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
@@ -278,7 +271,7 @@ const Contact: React.FC = () => {
           </div>
 
           <div className="bg-white p-12 rounded-[2.5rem] shadow-2xl border border-blue-50 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-600"></div>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-600" />
 
             <h2 className="text-3xl font-bold mb-10 tech-font text-slate-900">
               {t("contact.formTitle")}
@@ -322,17 +315,18 @@ const Contact: React.FC = () => {
                 <select
                   value={formData.subject}
                   onChange={(e) =>
-                    setFormData({ ...formData, subject: e.target.value })
+                    setFormData((prev) => ({
+                      ...prev,
+                      subject: e.target.value,
+                    }))
                   }
                   className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50 text-slate-700"
                   dir={lang === "he" ? "rtl" : "ltr"}
                 >
                   <option value="">{t("contact.placeholders.subject")}</option>
-
                   <option value="electrical">
                     {t("contact.subjectOptions.electricalDivision")}
                   </option>
-
                   <option value="information_systems">
                     {t("contact.subjectOptions.informationSystems")}
                   </option>
@@ -366,15 +360,17 @@ const Contact: React.FC = () => {
                     autoComplete="email"
                   />
                   {errors.email && (
-                    <p className="text-sm text-red-600 font-medium">{errors.email}</p>
+                    <p className="text-sm text-red-600 font-medium">
+                      {errors.email}
+                    </p>
                   )}
                 </div>
-              
+
                 <div className="space-y-2 min-w-0">
                   <label className="block text-sm font-bold text-slate-700">
                     {t("contact.fields.phone")}
                   </label>
-              
+
                   <div className="flex flex-col gap-3 min-w-0">
                     <select
                       value={formData.country}
@@ -384,65 +380,7 @@ const Contact: React.FC = () => {
                           ...prev,
                           country: nextCountry,
                         }));
-              
-                        if (formData.phone) {
-                          updateError("phone", validatePhone(formData.phone, nextCountry));
-                        }
-                      }}
-                      className="w-full min-w-0 px-4 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50 text-slate-700"
-                      dir="ltr"
-                    >
-                      {countries.map((country) => (
-                        <option key={country.code} value={country.code}>
-                          {country.code} {country.name} ({country.callingCode})
-                        </option>
-                      ))}
-                    </select>
-              
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        setFormData((prev) => ({ ...prev, phone: value }));
-                        if (errors.phone) {
-                          updateError("phone", validatePhone(value, formData.country));
-                        }
-                      }}
-                      onBlur={() => handleBlur("phone")}
-                      className={`w-full min-w-0 px-5 py-4 rounded-2xl border outline-none transition-all bg-slate-50/50 ${
-                        errors.phone
-                          ? "border-red-400 focus:border-red-500 focus:ring-4 focus:ring-red-100"
-                          : "border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                      }`}
-                      placeholder={t("contact.placeholders.phone")}
-                      dir="ltr"
-                      inputMode="tel"
-                      autoComplete="tel"
-                    />
-                  </div>
-              
-                  {errors.phone && (
-                    <p className="text-sm text-red-600 font-medium">{errors.phone}</p>
-                  )}
-                </div>
-              </div>
 
-                <div className="space-y-2">
-                  <label className="block text-sm font-bold text-slate-700">
-                    {t("contact.fields.phone")}
-                  </label>
-
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <select
-                      value={formData.country}
-                      onChange={(e) => {
-                        const nextCountry = e.target.value as CountryCode;
-                        setFormData((prev) => ({
-                          ...prev,
-                          country: nextCountry,
-                        }));
-                  
                         if (formData.phone) {
                           updateError(
                             "phone",
@@ -450,7 +388,7 @@ const Contact: React.FC = () => {
                           );
                         }
                       }}
-                      className="w-full sm:w-[260px] px-4 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50 text-slate-700"
+                      className="w-full min-w-0 px-4 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50 text-slate-700"
                       dir="ltr"
                     >
                       {countries.map((country) => (
@@ -459,7 +397,7 @@ const Contact: React.FC = () => {
                         </option>
                       ))}
                     </select>
-                  
+
                     <input
                       type="tel"
                       value={formData.phone}
@@ -467,7 +405,10 @@ const Contact: React.FC = () => {
                         const value = e.target.value;
                         setFormData((prev) => ({ ...prev, phone: value }));
                         if (errors.phone) {
-                          updateError("phone", validatePhone(value, formData.country));
+                          updateError(
+                            "phone",
+                            validatePhone(value, formData.country)
+                          );
                         }
                       }}
                       onBlur={() => handleBlur("phone")}
@@ -481,13 +422,13 @@ const Contact: React.FC = () => {
                       inputMode="tel"
                       autoComplete="tel"
                     />
-                  </div>
 
-                  {errors.phone && (
-                    <p className="text-sm text-red-600 font-medium">
-                      {errors.phone}
-                    </p>
-                  )}
+                    {errors.phone && (
+                      <p className="text-sm text-red-600 font-medium">
+                        {errors.phone}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -499,12 +440,15 @@ const Contact: React.FC = () => {
                   rows={4}
                   value={formData.message}
                   onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
+                    setFormData((prev) => ({
+                      ...prev,
+                      message: e.target.value,
+                    }))
                   }
                   className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50"
                   placeholder={t("contact.placeholders.message")}
                   dir={lang === "he" ? "rtl" : "ltr"}
-                ></textarea>
+                />
               </div>
 
               <div className="w-full bg-slate-200 text-slate-700 font-bold py-5 rounded-2xl flex items-center justify-center text-center px-4">
