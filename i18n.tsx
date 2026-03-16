@@ -248,52 +248,65 @@ export const copy = {
     },
 
     contact: {
-      pageTitle: "צור קשר",
-      pageSubtitle:
-        "אנחנו כאן כדי לענות על כל שאלה ולתאם פגישת היכרות מקצועית.",
-      detailsTitle: "פרטי התקשרות",
-      addressTitle: "כתובתנו",
-      addressText: "הורד 544, מושב קידרון, ישראל",
-      addressHint: "לחצו לניווט במפות",
-      availabilityTitle: "זמינות שירות",
-      availabilityHours: "ימי א' - ה' | בין השעות 08:30 - 18:00",
-      formTitle: "שלחו לנו הודעה",
-    
-      fields: {
-        fullName: "שם מלא",
-        subject: "נושא הפנייה",
-        email: 'דוא"ל',
-        phone: "טלפון",
-        message: "הודעה",
-      },
-    
-      placeholders: {
-        fullName: "ישראל ישראלי",
-        subject: "בחרו נושא",
-        email: "name@company.com",
-        phone: "05X-XXXXXXX",
-        message: "תארו בקצרה את הצורך שלכם...",
-      },
-    
-      subjectOptions: {
-        electricalDivision: "חטיבת החשמל",
-        informationSystems: "מערכות מידע",
-      },
-    
-      validation: {
-        nameRequired: "יש להזין שם מלא",
-        nameLettersOnly: "השם יכול להכיל אותיות בלבד",
-        emailRequired: 'יש להזין כתובת דוא"ל',
-        emailInvalid: "יש להזין כתובת דוא״ל תקינה",
-        emailNoSpaces: "כתובת דוא״ל לא יכולה להכיל רווחים",
-        phoneRequired: "יש להזין מספר טלפון",
-        phoneInvalid: "יש להזין מספר טלפון תקין",
-        phoneInvalidIsrael:
-          "בישראל מספר טלפון חייב להכיל 10 ספרות ולהתחיל ב-0",
-      },
-    
-      formUnavailable: "לא ניתן כרגע לשלוח פניות",
+  pageTitle: "צור קשר",
+  pageSubtitle:
+    "אנחנו כאן כדי לענות על כל שאלה ולתאם פגישת היכרות מקצועית.",
+  detailsTitle: "פרטי התקשרות",
+  addressTitle: "כתובתנו",
+  addressText: "הורד 544, מושב קידרון, ישראל",
+  addressHint: "לחצו לניווט במפות",
+  availabilityTitle: "זמינות שירות",
+  availabilityHours: "ימי א' - ה' | בין השעות 08:30 - 18:00",
+  formTitle: "שלחו לנו הודעה",
+
+  peopleTitle: "אנשי קשר",
+  people: {
+    hila: {
+      name: "הילה כהן",
+      role: "מנהלת מערכות מידע",
+      email: "hila@solchi.co.il",
     },
+    yehiel: {
+      name: "יחיאל אמיר כהן",
+      role: "מנהל חטיבת החשמל",
+      email: "yehiel@solchi.co.il",
+    },
+  },
+
+  fields: {
+    fullName: "שם מלא",
+    subject: "נושא הפנייה",
+    email: 'דוא"ל',
+    phone: "טלפון",
+    message: "הודעה",
+  },
+
+  placeholders: {
+    fullName: "ישראל ישראלי",
+    subject: "בחרו נושא",
+    email: "name@company.com",
+    phone: "05X-XXXXXXX",
+    message: "תארו בקצרה את הצורך שלכם...",
+  },
+
+  subjectOptions: {
+    electricalDivision: "חטיבת החשמל",
+    informationSystems: "מערכות מידע",
+  },
+
+  validation: {
+    nameRequired: "יש להזין שם מלא",
+    nameLettersOnly: "השם יכול להכיל אותיות בלבד",
+    emailRequired: 'יש להזין כתובת דוא"ל',
+    emailInvalid: "יש להזין כתובת דוא״ל תקינה",
+    emailNoSpaces: "כתובת דוא״ל לא יכולה להכיל רווחים",
+    phoneRequired: "יש להזין מספר טלפון",
+    phoneInvalid: "יש להזין מספר טלפון תקין",
+    phoneInvalidIsrael: "בישראל מספר טלפון חייב להכיל 10 ספרות ולהתחיל ב-0",
+  },
+
+  formUnavailable: "לא ניתן כרגע לשלוח פניות",
+},
 
     thankYou: {
       title: "הודעתכם התקבלה!",
@@ -599,6 +612,20 @@ export const copy = {
       availabilityTitle: "Service Availability",
       availabilityHours: "Sunday–Thursday | 08:30–18:00",
       formTitle: "Send Us a Message",
+
+      peopleTitle: "Contact People",
+      people: {
+        hila: {
+          name: "Hila Cohen",
+          role: "Information Systems Manager",
+          email: "hila@solchi.co.il",
+        },
+        yehiel: {
+          name: "Yehiel Amir Cohen",
+          role: "Electricity Division Manager",
+          email: "yehiel@solchi.co.il",
+        },
+      },
     
       fields: {
         fullName: "Full Name",
