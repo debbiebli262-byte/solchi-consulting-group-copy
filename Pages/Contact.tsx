@@ -380,29 +380,25 @@ const Contact: React.FC = () => {
                 </label>
 
                 <select
-                  value={formData.country}
-                  onChange={(e) => {
-                    const nextCountry = e.target.value as CountryCode;
+                  value={formData.subject}
+                  onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      country: nextCountry,
-                    }));
-                
-                    if (formData.phone) {
-                      updateError(
-                        "phone",
-                        validatePhone(formData.phone, nextCountry)
-                      );
-                    }
-                  }}
-                  className="w-[42%] sm:w-[38%] px-4 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50 text-slate-700"
-                  dir="ltr"
+                      subject: e.target.value,
+                    }))
+                  }
+                  className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50 text-slate-700"
                 >
-                  {countries.map((country) => (
-                    <option key={country.code} value={country.code}>
-                      {country.flag} {country.name} ({country.callingCode})
-                    </option>
-                  ))}
+                  <option value="">{t("contact.placeholders.subject")}</option>
+
+                  <option value="electrical">
+                    {t("contact.subjectOptions.electricalDivision")}
+                  </option>
+
+                  <option value="information_systems">
+                    {t("contact.subjectOptions.informationSystems")}
+                  </option>
+
                 </select>
 
               </div>
