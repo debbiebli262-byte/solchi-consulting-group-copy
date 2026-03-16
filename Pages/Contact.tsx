@@ -366,11 +366,67 @@ const Contact: React.FC = () => {
                     autoComplete="email"
                   />
                   {errors.email && (
-                    <p className="text-sm text-red-600 font-medium">
-                      {errors.email}
-                    </p>
+                    <p className="text-sm text-red-600 font-medium">{errors.email}</p>
                   )}
                 </div>
+              
+                <div className="space-y-2 min-w-0">
+                  <label className="block text-sm font-bold text-slate-700">
+                    {t("contact.fields.phone")}
+                  </label>
+              
+                  <div className="flex flex-col gap-3 min-w-0">
+                    <select
+                      value={formData.country}
+                      onChange={(e) => {
+                        const nextCountry = e.target.value as CountryCode;
+                        setFormData((prev) => ({
+                          ...prev,
+                          country: nextCountry,
+                        }));
+              
+                        if (formData.phone) {
+                          updateError("phone", validatePhone(formData.phone, nextCountry));
+                        }
+                      }}
+                      className="w-full min-w-0 px-4 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50 text-slate-700"
+                      dir="ltr"
+                    >
+                      {countries.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {country.code} {country.name} ({country.callingCode})
+                        </option>
+                      ))}
+                    </select>
+              
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setFormData((prev) => ({ ...prev, phone: value }));
+                        if (errors.phone) {
+                          updateError("phone", validatePhone(value, formData.country));
+                        }
+                      }}
+                      onBlur={() => handleBlur("phone")}
+                      className={`w-full min-w-0 px-5 py-4 rounded-2xl border outline-none transition-all bg-slate-50/50 ${
+                        errors.phone
+                          ? "border-red-400 focus:border-red-500 focus:ring-4 focus:ring-red-100"
+                          : "border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                      }`}
+                      placeholder={t("contact.placeholders.phone")}
+                      dir="ltr"
+                      inputMode="tel"
+                      autoComplete="tel"
+                    />
+                  </div>
+              
+                  {errors.phone && (
+                    <p className="text-sm text-red-600 font-medium">{errors.phone}</p>
+                  )}
+                </div>
+              </div>
 
                 <div className="space-y-2">
                   <label className="block text-sm font-bold text-slate-700">
