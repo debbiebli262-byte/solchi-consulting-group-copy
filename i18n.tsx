@@ -258,7 +258,7 @@ export const copy = {
       availabilityTitle: "זמינות שירות",
       availabilityHours: "ימי א' - ה' | בין השעות 08:30 - 18:00",
       formTitle: "שלחו לנו הודעה",
-
+    
       fields: {
         fullName: "שם מלא",
         subject: "נושא הפנייה",
@@ -266,7 +266,7 @@ export const copy = {
         phone: "טלפון",
         message: "הודעה",
       },
-
+    
       placeholders: {
         fullName: "ישראל ישראלי",
         subject: "בחרו נושא",
@@ -274,12 +274,24 @@ export const copy = {
         phone: "05X-XXXXXXX",
         message: "תארו בקצרה את הצורך שלכם...",
       },
-
+    
       subjectOptions: {
         electricalDivision: "חטיבת החשמל",
         informationSystems: "מערכות מידע",
       },
-
+    
+      validation: {
+        nameRequired: "יש להזין שם מלא",
+        nameLettersOnly: "השם יכול להכיל אותיות בלבד",
+        emailRequired: 'יש להזין כתובת דוא"ל',
+        emailInvalid: "יש להזין כתובת דוא״ל תקינה",
+        emailNoSpaces: "כתובת דוא״ל לא יכולה להכיל רווחים",
+        phoneRequired: "יש להזין מספר טלפון",
+        phoneInvalid: "יש להזין מספר טלפון תקין",
+        phoneInvalidIsrael:
+          "בישראל מספר טלפון חייב להכיל 10 ספרות ולהתחיל ב-0",
+      },
+    
       formUnavailable: "לא ניתן כרגע לשלוח פניות",
     },
 
@@ -298,7 +310,7 @@ export const copy = {
         about: "אודות הקבוצה",
         electricity: "חטיבת חשמל",
         is: "מערכות מידע",
-        contact: "צור קשר",
+        : "צור קשר",
       },
       contactTitle: "צרו קשר",
       address: "הורד 544, מושב קידרון, ישראל",
@@ -587,7 +599,7 @@ export const copy = {
       availabilityTitle: "Service Availability",
       availabilityHours: "Sunday–Thursday | 08:30–18:00",
       formTitle: "Send Us a Message",
-
+    
       fields: {
         fullName: "Full Name",
         subject: "Inquiry Subject",
@@ -595,20 +607,32 @@ export const copy = {
         phone: "Phone",
         message: "Message",
       },
-
+    
       placeholders: {
         fullName: "John Doe",
         subject: "Select a subject",
         email: "name@company.com",
-        phone: "+972-5X-XXXXXXX",
+        phone: "+972 5X XXX XXXX",
         message: "Briefly describe what you need...",
       },
-
+    
       subjectOptions: {
         electricalDivision: "Electrical Division",
         informationSystems: "Information Systems",
       },
-
+    
+      validation: {
+        nameRequired: "Full name is required",
+        nameLettersOnly: "Name can contain letters only",
+        emailRequired: "Email is required",
+        emailInvalid: "Please enter a valid email address",
+        emailNoSpaces: "Email cannot contain spaces",
+        phoneRequired: "Phone number is required",
+        phoneInvalid: "Please enter a valid phone number",
+        phoneInvalidIsrael:
+          "Israeli phone numbers must contain exactly 10 digits and start with 0",
+      },
+    
       formUnavailable: "It is currently not possible to send inquiries",
     },
 
