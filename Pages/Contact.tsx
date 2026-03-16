@@ -466,7 +466,7 @@ const Contact: React.FC = () => {
                   >
                     {countries.map((country) => (
                       <option key={country.code} value={country.code}>
-                        {country.name}
+                        {country.name} (+{country.callingCode})
                       </option>
                     ))}
                   </select>
