@@ -330,6 +330,7 @@ export const copy = {
       /* ---------- שדות טופס ---------- */
       fields: {
         fullName: "שם מלא",
+        division: "חטיבה רלוונטית",
         subject: "נושא הפנייה",
         email: 'דוא"ל',
         phone: "טלפון",
@@ -339,6 +340,7 @@ export const copy = {
       /* ---------- placeholders ---------- */
       placeholders: {
         fullName: "ישראל ישראלי",
+        division: "בחרו חטיבה",
         subject: "בחרו נושא",
         email: "name@company.com",
         phone: "05X-XXXXXXX",
@@ -736,6 +738,7 @@ export const copy = {
       /* ---------- שדות טופס ---------- */
       fields: {
         fullName: "Full Name",
+        division: "Relevant Division",
         subject: "Inquiry Subject",
         email: "Email",
         phone: "Phone",
@@ -745,6 +748,7 @@ export const copy = {
       /* ---------- placeholders ---------- */
       placeholders: {
         fullName: "John Doe",
+        division: "Select a division",
         subject: "Select a subject",
         email: "name@company.com",
         phone: "+972 5X XXX XXXX",
