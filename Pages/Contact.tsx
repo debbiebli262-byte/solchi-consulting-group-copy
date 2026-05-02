@@ -9,7 +9,7 @@ const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const CONTACT_EMAILS: Record<string, string> = {
   electrical: "yehiel@solchi.co.il",
-  information_systems: "hila@solchi.com",
+  information_systems: "hila@solchi.co.il",
 };
 
 const Contact: React.FC = () => {
