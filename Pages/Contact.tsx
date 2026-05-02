@@ -20,9 +20,11 @@ const Contact: React.FC = () => {
     name: "",
     email: "",
     phone: "",
+    division: "",
     subject: "",
     message: "",
   });
+
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState("");
 
@@ -33,18 +35,30 @@ const Contact: React.FC = () => {
     );
   };
 
+  const getDivisionLabel = () => {
+    if (formData.division === "electrical") {
+      return t("contact.subjectOptions.electricalDivision");
+    }
+
+    if (formData.division === "information_systems") {
+      return t("contact.subjectOptions.informationSystems");
+    }
+
+    return "";
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    const toEmail = CONTACT_EMAILS[formData.subject];
+    const toEmail = CONTACT_EMAILS[formData.division];
 
     if (!toEmail) {
       setError(t("contact.errors.subjectRequired"));
       return;
     }
 
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       setError(t("contact.errors.requiredFields"));
       return;
     }
@@ -65,10 +79,8 @@ const Contact: React.FC = () => {
           from_name: formData.name,
           from_email: formData.email,
           phone: formData.phone,
-          subject:
-            formData.subject === "electrical"
-              ? t("contact.subjectOptions.electricalDivision")
-              : t("contact.subjectOptions.informationSystems"),
+          division: getDivisionLabel(),
+          subject: formData.subject,
           message: formData.message,
         },
         { publicKey: EMAILJS_PUBLIC_KEY }
@@ -78,9 +90,11 @@ const Contact: React.FC = () => {
         name: "",
         email: "",
         phone: "",
+        division: "",
         subject: "",
         message: "",
       });
+
       navigate("/thank-you");
     } catch (err) {
       console.error("EmailJS error:", err);
@@ -153,13 +167,14 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
 
-                {/* אנשי קשר */}
                 <div className="space-y-6">
                   <div>
                     <h4 className="font-bold text-slate-900 text-lg">
-                      הילה כהן
+                      {t("contact.people.hila.name")}
                     </h4>
-                    <p className="text-slate-600">מנהלת מערכות מידע</p>
+                    <p className="text-slate-600">
+                      {t("contact.people.hila.role")}
+                    </p>
                     <a
                       href="mailto:hila@solchi.co.il"
                       className="text-blue-600 hover:underline"
@@ -170,9 +185,11 @@ const Contact: React.FC = () => {
 
                   <div>
                     <h4 className="font-bold text-slate-900 text-lg">
-                      יחיאל אמיר כהן
+                      {t("contact.people.yehiel.name")}
                     </h4>
-                    <p className="text-slate-600">מנהל חטיבת החשמל</p>
+                    <p className="text-slate-600">
+                      {t("contact.people.yehiel.role")}
+                    </p>
                     <a
                       href="mailto:yehiel@solchi.co.il"
                       className="text-blue-600 hover:underline"
@@ -218,8 +235,130 @@ const Contact: React.FC = () => {
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* שאר הטופס נשאר ללא שינוי */}
-              ...
+              <div className="space-y-2">
+                <label className="block text-sm font-bold text-slate-700">
+                  {t("contact.fields.fullName")}
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50"
+                  placeholder={t("contact.placeholders.fullName")}
+                  dir={lang === "he" ? "rtl" : "ltr"}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-bold text-slate-700">
+                  {t("contact.fields.division")}
+                </label>
+                <select
+                  required
+                  value={formData.division}
+                  onChange={(e) =>
+                    setFormData({ ...formData, division: e.target.value })
+                  }
+                  className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50 text-slate-700"
+                  dir={lang === "he" ? "rtl" : "ltr"}
+                >
+                  <option value="">
+                    {t("contact.placeholders.division")}
+                  </option>
+
+                  <option value="electrical">
+                    {t("contact.subjectOptions.electricalDivision")}
+                  </option>
+
+                  <option value="information_systems">
+                    {t("contact.subjectOptions.informationSystems")}
+                  </option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-bold text-slate-700">
+                  {t("contact.fields.subject")}
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.subject}
+                  onChange={(e) =>
+                    setFormData({ ...formData, subject: e.target.value })
+                  }
+                  className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50"
+                  placeholder={t("contact.placeholders.subject")}
+                  dir={lang === "he" ? "rtl" : "ltr"}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-sm font-bold text-slate-700">
+                    {t("contact.fields.email")}
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50"
+                    placeholder={t("contact.placeholders.email")}
+                    dir="ltr"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-sm font-bold text-slate-700">
+                    {t("contact.fields.phone")}
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
+                    className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50"
+                    placeholder={t("contact.placeholders.phone")}
+                    dir="ltr"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-bold text-slate-700">
+                  {t("contact.fields.message")}
+                </label>
+                <textarea
+                  rows={4}
+                  required
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-slate-50/50"
+                  placeholder={t("contact.placeholders.message")}
+                  dir={lang === "he" ? "rtl" : "ltr"}
+                ></textarea>
+              </div>
+
+              {error && (
+                <p className="text-red-600 font-bold text-sm">{error}</p>
+              )}
+
+              <button
+                type="submit"
+                disabled={isSending}
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-slate-400 text-white font-bold py-5 rounded-2xl flex items-center justify-center text-center px-4 transition-colors"
+              >
+                {isSending ? t("contact.sending") : t("contact.submit")}
+              </button>
             </form>
           </div>
         </div>
