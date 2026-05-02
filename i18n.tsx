@@ -309,6 +309,8 @@ export const copy = {
       availabilityTitle: "זמינות שירות",
       availabilityHours: "ימי א' - ה' | בין השעות 08:30 - 18:00",
       formTitle: "שלחו לנו הודעה",
+      submit: "שלח פניה",
+      sending: "שולח...",
 
       /* ---------- אנשי קשר ---------- */
       peopleTitle: "אנשי קשר",
@@ -713,6 +715,8 @@ export const copy = {
       availabilityTitle: "Service Availability",
       availabilityHours: "Sunday–Thursday | 08:30–18:00",
       formTitle: "Send Us a Message",
+      submit: "Send Inquiry",
+      sending: "Sending...",
 
       /* ---------- אנשי קשר ---------- */
       peopleTitle: "Contact People",
